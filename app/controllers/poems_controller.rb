@@ -10,6 +10,7 @@ class PoemsController < ApplicationController
   # GET /poems/1
   # GET /poems/1.json
   def show
+    @poem = Poem.find(params[:id])
   end
 
   # GET /poems/new
@@ -39,7 +40,9 @@ class PoemsController < ApplicationController
 
   # PATCH/PUT /poems/1
   # PATCH/PUT /poems/1.json
+  
   def update
+    @poem = Poem.find(params[:id])
     respond_to do |format|
       if @poem.update(poem_params)
         format.html { redirect_to @poem, notice: 'Poem was successfully updated.' }
@@ -69,6 +72,7 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      params.require(:poem).permit(:content, :auther)
+      params.require(:poem).permit(:title, :content, :auther)
     end
 end
+
